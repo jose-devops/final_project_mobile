@@ -102,11 +102,8 @@ class _ClientesScreenState extends State<ClientesScreen> {
   }
 
   void _navigateTo(int index) {
-    if (index == 0) {
-      // Já está na tela de clientes, não faz nada
-    } else if (index == 1) {
-      // Navega para a tela de pedidos
-      Navigator.pushReplacementNamed(context, '/pedidos');
+    if (index == 1) {
+      Navigator.pushReplacementNamed(context, '/pedidos'); // Navega para a tela de pedidos
     }
   }
 
@@ -215,10 +212,10 @@ class _ClientesScreenState extends State<ClientesScreen> {
                         // Se o usuário confirmar
                         if (confirm == true) {
                           await _clienteService.deleteCliente(cliente.id!); // Chama o serviço para deletar
-                          await _carregarClientes(); // Recarrega a lista completa
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text('Cliente deletado com sucesso!')),
                           );
+                          _carregarClientes(); // Atualiza a lista de clientes após exclusão
                         }
                       } catch (e) {
                         // Exibe mensagem de erro
@@ -227,8 +224,6 @@ class _ClientesScreenState extends State<ClientesScreen> {
                         );
                       }
                     },
-
-
 
                   );
                 },

@@ -1,19 +1,28 @@
 class Pedido {
-  final int id;
+  final String? id; // Torna o ID opcional
   final String descricao;
   final double valorTotal;
   final String status;
-  final int clienteId;
+  final String clienteId;
 
   Pedido({
-    required this.id,
+    this.id, // ID agora é opcional
     required this.descricao,
     required this.valorTotal,
     required this.status,
     required this.clienteId,
   });
 
-  factory Pedido.fromJson(Map<String, dynamic> json) {
+  Map<String, dynamic> toJson() {
+    return {
+      'descricao': descricao,
+      'valorTotal': valorTotal,
+      'status': status,
+      'clienteId': clienteId,
+    };
+  }
+
+  static Pedido fromJson(Map<String, dynamic> json) {
     return Pedido(
       id: json['id'],
       descricao: json['descricao'],
@@ -21,15 +30,5 @@ class Pedido {
       status: json['status'],
       clienteId: json['clienteId'],
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'descricao': descricao,
-      'valorTotal': valorTotal,
-      'status': status,
-      'clienteId': clienteId,
-    };
   }
 }
